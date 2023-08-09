@@ -7,6 +7,7 @@
 
 #include "MainDlg.h"
 #include <filesystem>
+#include <fstream>
 #include "PEParser.h"
 #include <WinInet.h>
 
@@ -347,12 +348,21 @@ LRESULT CMainDlg::OnProgressStart(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*
 }
 
 LRESULT CMainDlg::OnDone(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/) {
+	WCHAR path[MAX_PATH];
+	::GetCurrentDirectory(MAX_PATH, path);
+	wcscat_s(path, L"\\Symbols\\sdm.json");
+	std::fstream r;
+	r.open(path,std::ios::out);
+	r.close();
 	m_Data.clear();
 	m_Running = false;
 	AtlMessageBox(*this, L"All done!", IDR_MAINFRAME, MB_ICONINFORMATION);
 	m_CanDownload = true;
 	m_Progress.SetPos(0);
 	UpdateButtons();
+
+
+
 
 	return 0;
 }
