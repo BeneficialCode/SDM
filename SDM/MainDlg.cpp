@@ -209,6 +209,7 @@ LRESULT CMainDlg::OnPull(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL&
 	AddFile(L"ntdll.dll");
 	AddFile(L"win32k.sys");
 	AddFile(L"drivers\\fltmgr.sys");
+	AddFile(L"ci.dll");
 
 	WCHAR path[MAX_PATH];
 	::GetCurrentDirectory(MAX_PATH, path);
